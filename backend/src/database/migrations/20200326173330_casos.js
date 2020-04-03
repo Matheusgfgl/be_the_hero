@@ -11,9 +11,9 @@ exports.up = function(knex) {
 
         table.foreign('ong_id').references('id').inTable('ongs')
         
-    })
+    });
 };
 
 exports.down = function(knex) {
-    knex.shema.dropTable('casos')
-};
+    knex.schema.dropTable('casos');
+}

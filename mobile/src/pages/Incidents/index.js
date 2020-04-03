@@ -31,7 +31,6 @@ export default function Incidets(){
         const response = await api.get('casos', 
             {params: {page}
         });
-
         setIncidents([... incidents, ... response.data]);
         setTotal(response.headers['x-total-count']);
         setPAge(page + 1);
@@ -60,28 +59,29 @@ export default function Incidets(){
                 showsHorizontalScrollIndicator = {false}
                 onEndReached = {loadIncidents}
                 onEndReachedThreshold = {0.2}
-                renderItem = {( {item} ) => (
+                renderItem = {( {item : incident} ) => (
+
                     <View style={styles.incident}>
-                    <Text style = {styles.incidentProperty} >ONG: </Text>
-                    <Text style = {styles.incidentValue} >{item.name} </Text>
+                        <Text style = {styles.incidentProperty} >ONG: </Text>
+                        <Text style = {styles.incidentValue} > {incident.name} </Text>
 
 
-                    <Text style = {styles.incidentProperty} >CASO: </Text>
-                <Text style = {styles.incidentValue} >{item.title}</Text>
-                
-                    <Text style = {styles.incidentProperty}> VALOR:</Text>
-                    <Text style = {styles.incidentValue}> {Intl.NumberFormat('pt-BR', 
-                    {style: 'currency', currency: 'BRL'}).format(item.value)} </Text>
+                        <Text style = {styles.incidentProperty} >CASO: </Text>
+                        <Text style = {styles.incidentValue} >{incident.title}</Text>
+                    
+                        <Text style = {styles.incidentProperty}> VALOR:</Text>
+                        <Text style = {styles.incidentValue}> {Intl.NumberFormat('pt-BR', 
+                        {style: 'currency', currency: 'BRL'}).format(incident.value)} </Text>
 
-                    <TouchableOpacity 
-                    style={styles.detailsButton} 
-                    onPress={() => navigateToDetail(item)}
-                    >
+                        <TouchableOpacity 
+                        style={styles.detailsButton} 
+                        onPress={() => navigateToDetail(incident)}
+                        >
 
-                    <Text style = {styles.detailsButtonText}>Ver mais Detalhes</Text>
-                    <Feather name="arrow-right" size={24} color = "#E02041"/>
-                    </TouchableOpacity>
-                </View>
+                        <Text style = {styles.detailsButtonText}>Ver mais Detalhes</Text>
+                        <Feather name="arrow-right" size={24} color = "#E02041"/>
+                        </TouchableOpacity>
+                    </View>
                 )}
             />
 
